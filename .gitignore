@@ -1,0 +1,20 @@
+﻿.env
+.env.*
+!.env.example
+
+# Local data and generated artifacts
+data/
+raw/
+inbox/
+reports/
+.nb_*/
+*.duckdb
+*.duckdb.wal
+*.parquet
+
+# Python and notebook caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
