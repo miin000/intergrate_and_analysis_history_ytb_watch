@@ -1,0 +1,84 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Insight YouTube</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#EEF2F4;--card:#fff;--ink:#14213D;--mut:#5B6B7F;--line:#D5DDE3;--a:#0E7C86;--b:#E4572E;--cell:#E3EAEE;--soft:#F6F9FA}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0E1620;--card:#16222F;--ink:#E8EEF3;--mut:#93A3B5;--line:#263647;--a:#3CC4CE;--b:#FF8A5C;--cell:#1D2C3B;--soft:#122030}}
+:root[data-theme=dark]{--bg:#0E1620;--card:#16222F;--ink:#E8EEF3;--mut:#93A3B5;--line:#263647;--a:#3CC4CE;--b:#FF8A5C;--cell:#1D2C3B;--soft:#122030}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 "Be Vietnam Pro",system-ui,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:clamp(26px,4.6vw,40px);line-height:1.15;margin:0 0 10px;font-weight:800;max-width:20ch}
+h2{font-size:17px;margin:0 0 4px;font-weight:700}p{margin:0}.mut{color:var(--mut);font-size:13px}
+.lead{max-width:62ch;color:var(--mut)}
+.kpis{display:flex;flex-wrap:wrap;gap:10px 28px;margin:22px 0 26px;padding:14px 0;border-block:1px solid var(--line)}
+.kpis div{min-width:92px}.kpis b{display:block;font-size:22px;font-weight:800}.kpis span{font-size:12px;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:16px}.grid .card{margin:0}
+.heat{display:grid;grid-template-columns:26px repeat(24,1fr);gap:3px;margin-top:14px}
+.heat i{aspect-ratio:1;border-radius:3px;background:color-mix(in srgb,var(--a) calc(var(--v)*100%),var(--cell))}
+.heat em,.hl{font:500 11px/1 inherit;font-style:normal;color:var(--mut);display:flex;align-items:center}
+.hl{justify-content:center;padding-bottom:4px}
+.row{display:grid;grid-template-columns:minmax(80px,120px) 1fr 44px;gap:8px;align-items:center;margin:7px 0;font-size:13px}
+.row .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bar{height:12px;border-radius:6px;background:var(--cell);overflow:hidden}.bar u{display:block;height:100%;background:var(--a);border-radius:6px}
+.row .n{text-align:right;color:var(--mut);font-variant-numeric:tabular-nums}
+.stack{display:flex;height:34px;border-radius:8px;overflow:hidden;margin:14px 0 8px;gap:2px}.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px}
+.leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut)}.leg b{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}th,td{padding:7px 4px;text-align:right;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}th{font-weight:500;color:var(--mut)}tr.on td{font-weight:700;color:var(--a)}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:500 10px "Be Vietnam Pro",system-ui,sans-serif}
+.pending{border-style:dashed;background:var(--soft)}.pending h2{color:var(--mut)}.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;font-size:13px}.cols ol{margin:6px 0 0;padding-left:18px}.cols strong{font-size:12px;color:var(--mut);font-weight:500}
+.big{font-size:34px;font-weight:800;color:var(--b);line-height:1}.efrow{display:grid;grid-template-columns:minmax(110px,1fr) minmax(90px,1.3fr) 54px;gap:8px;align-items:center;margin:8px 0;font-size:13px}.efrow .bar{position:relative}.efrow .bar:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--mut);z-index:1}.efrow u.pos{background:var(--a)}.efrow u.neg{background:var(--b)}.hourline{margin-top:8px}.hourline svg{height:150px}.empty{padding:14px 0;color:var(--mut);font-size:13px}
+h3{font-size:13px;color:var(--mut);margin:26px 0 10px;font-weight:700}
+</style></head><body><main>
+<h1 id="hl"></h1><p class="lead" id="sub"></p>
+<div class="kpis" id="kpi"></div>
+<section class="card"><h2>Khi nào xem nhiều nhất</h2><p class="mut">Số lượt xem theo thứ và giờ (giờ Việt Nam). Ô càng đậm càng nhiều lượt.</p><div class="heat" id="heat"></div></section>
+<h3>Nhịp xem và phiên xem</h3>
+<div class="grid">
+<section class="card"><h2>Xem vào buổi nào</h2><p class="mut">Tỷ trọng lượt xem theo khung giờ</p><div class="stack" id="dp"></div><div class="leg" id="dpl"></div></section>
+<section class="card"><h2>Lượt xem mỗi ngày theo tháng</h2><p class="mut" id="monnote"></p><div id="mon"></div></section>
+<section class="card"><h2>Một phiên xem dài bao nhiêu video</h2><p class="mut">Phiên mới bắt đầu khi im lặng quá 30 phút</p><div id="sd"></div></section>
+<section class="card"><h2>Đổi ngưỡng phiên thì kết quả đổi thế nào</h2><p class="mut">Kiểm tra độ nhạy của định nghĩa “phiên”</p><table id="gap"></table></section>
+</div>
+<h3>Nội dung và sở thích</h3>
+<div class="grid">
+<section class="card"><h2>Kênh xem nhiều nhất</h2><div id="top"></div><p class="mut" id="conc"></p></section>
+<section class="card"><h2>Từ khóa hay gặp trong tiêu đề</h2><p class="mut">Số video khác nhau có chứa từ đó (chưa tách từ tiếng Việt)</p><div id="words"></div></section>
+<section class="card"><h2>Sở thích có đổi không</h2><p class="mut">So nửa đầu và nửa sau của giai đoạn dữ liệu</p><div class="big" id="newch"></div><p class="mut" style="margin-top:4px">kênh ở nửa sau chưa từng xuất hiện ở nửa đầu</p><div class="cols" id="cmp"></div></section>
+</div>
+<h3>Nội dung video và cụm người xem</h3>
+<div class="grid">
+<section class="card"><h2>Video thường đăng giờ nào</h2><p class="mut">Số video đã xem theo thứ × giờ đăng (giờ Việt Nam); mỗi video tính một lần.</p><div class="heat" id="pubheat"></div><p class="mut">Chỉ tính video có ngày đăng trong metadata.</p></section>
+<section class="card"><h2>Đặc điểm tiêu đề và lượt xem</h2><p class="mut">Tỷ số trung vị views/ngày của video có đặc điểm đó so với video không có, trong cùng thể loại. 1,0 là ngang nhau.</p><div id="titlefx"></div><p class="mut">Lượt xem là ảnh chụp tại lúc lấy metadata; chỉ hiển thị nhóm đủ dữ liệu.</p></section>
+<section class="card"><h2>Combo thể loại trong phiên</h2><p class="mut">Lift của cặp thể loại cùng xuất hiện trong một phiên; chỉ giữ cặp có từ 3 phiên.</p><table id="combos"></table></section>
+<section class="card"><h2>Nhóm người xem (KMeans)</h2><div id="clusterbox"></div><div id="clusterhour"></div></section>
+</div>
+<p class="mut" id="foot" style="margin-top:22px"></p>
+</main><script>
+const D=__INSIGHT_DATA__,$=id=>document.getElementById(id),f=n=>n.toLocaleString("vi-VN"),C=["#0E7C86","#3E9BD1","#E4572E","#7A5BD1"];
+const esc=s=>String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const bars=(el,a,max)=>{if(!a.length){$(el).innerHTML="<div class=empty>Chưa có dữ liệu.</div>";return}max=max||Math.max(...a.map(x=>x[1]));$(el).innerHTML=a.map(x=>`<div class="row"><span class="t" title="${esc(x[0])}">${esc(x[0])}</span><span class="bar"><u style="width:${x[1]/max*100}%"></u></span><span class="n">${f(x[1])}</span></div>`).join("")};
+document.title=`Insight YouTube – ${D.id}`;
+$("hl").textContent=`${D.night}% lượt xem diễn ra sau 22 giờ đêm`;
+$("sub").textContent=`${f(D.n)} lượt xem từ ${D.start} đến ${D.end}, trong ${D.active} ngày hoạt động. Giờ cao điểm là ${D.peak} giờ.`;
+$("kpi").innerHTML=[[f(D.n),"lượt xem"],[f(D.vids),"video khác nhau"],[D.active,"ngày hoạt động"],[f(D.sess),"phiên xem"],[D.rep+"%","lượt xem lại video cũ"],[D.wk+"%","xem vào cuối tuần"]].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+const mx=Math.max(...D.heat.flat()),dn=["T2","T3","T4","T5","T6","T7","CN"];let h='<span></span>'+[...Array(24).keys()].map(i=>`<span class="hl">${i%3?"":i}</span>`).join("");
+D.heat.forEach((r,i)=>{h+=`<em>${dn[i]}</em>`+r.map((v,j)=>`<i style="--v:${(v/mx).toFixed(2)}" title="${dn[i]} ${j}h: ${v} lượt"></i>`).join("")});$("heat").innerHTML=h;
+const nm=["Sáng 5-12h","Chiều 12-18h","Tối 18-22h","Đêm 22-5h"];$("dp").innerHTML=D.dp.map((v,i)=>`<div style="width:${v}%;background:${C[i]}">${v}%</div>`).join("");$("dpl").innerHTML=nm.map((n,i)=>`<span><b style="background:${C[i]}"></b>${n}</span>`).join("");
+const m=D.mon,M=Math.max(...m.map(x=>x[2]),1);$("monnote").textContent=D.monNote;
+const step=360/Math.max(m.length,1),w=Math.min(38,step*.72);$("mon").innerHTML=`<svg viewBox="0 0 400 170">`+m.map((x,i)=>{const xx=20+i*step,hh=x[2]/M*105,opacity=x[4]?.35:1;return `<rect x="${xx}" y="${130-hh}" width="${w}" height="${hh}" rx="4" fill="var(--a)" opacity="${opacity}"/><text x="${xx+w/2}" y="${124-hh}" text-anchor="middle">${f(x[2])}</text><text x="${xx+w/2}" y="146" text-anchor="middle">${x[0].slice(5)}</text><text x="${xx+w/2}" y="160" text-anchor="middle">${f(x[1])}</text>`}).join("")+`</svg>`;
+bars("sd",D.sd.lab.map((l,i)=>[l+" video",D.sd.v[i]]));
+$("gap").innerHTML=`<tr><th>Ngưỡng</th><th>Số phiên</th><th>Video/phiên</th><th>Phiên ≥8 video</th></tr>`+Object.entries(D.gaps).map(([g,r])=>`<tr class="${g==30?"on":""}"><td>${g} phút</td><td>${f(r.sessions)}</td><td>${r.avg}</td><td>${r.binge}%</td></tr>`).join("");
+bars("top",D.top);$("conc").textContent=`${f(D.conc.n)} kênh khác nhau. Top 1 chiếm ${D.conc.top1}%, top 5 chiếm ${D.conc.top5}%, top 20 chiếm ${D.conc.top20}%: bạn xem dàn trải, không phụ thuộc vài kênh.`;
+bars("words",D.words);
+$("newch").textContent=D.newch+"%";
+$("cmp").innerHTML=`<div><strong>Top kênh nửa đầu</strong><ol>${D.ta.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div><div><strong>Top kênh nửa sau</strong><ol>${D.tb.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`;
+
+const p=D.perf||{},dn2=["T2","T3","T4","T5","T6","T7","CN"];
+function heatmap(id,M){const mx=Math.max(...M.flat(),1);let out='<span></span>'+[...Array(24).keys()].map(i=>`<span class="hl">${i%3?"":i}</span>`).join("");M.forEach((r,i)=>{out+=`<em>${dn2[i]}</em>`+r.map((v,j)=>`<i style="--v:${(v/mx).toFixed(2)}" title="${dn2[i]} ${j}h: ${v} video"></i>`).join("")});$(id).innerHTML=out}
+heatmap("pubheat",p.pub||Array.from({length:7},()=>Array(24).fill(0)));
+const tf=p.title||[];if(!tf.length){$("titlefx").innerHTML='<div class=empty>Chưa đủ video có metadata theo thể loại để so sánh tiêu đề.</div>'}else{$("titlefx").innerHTML=tf.map(([label,ratio,n])=>{const width=Math.min(Math.abs(ratio-1)/Math.max(...tf.map(x=>Math.abs(x[1]-1)),.01)*48,48);return `<div class="efrow"><span>${esc(label)} · ${n} video</span><span class="bar"><u class="${ratio>=1?'pos':'neg'}" style="position:absolute;${ratio>=1?'left:50%':'right:50%'};width:${width}%"></u></span><span class="n">${ratio.toFixed(2)}×</span></div>`}).join("")}
+const cb=p.combos||[];$("combos").innerHTML=cb.length?'<tr><th>Combo</th><th>Lift</th><th>Views/ngày trung vị</th><th>Số phiên</th></tr>'+cb.map(r=>`<tr><td>${esc(r[0])}</td><td>${r[1].toFixed(2)}</td><td>${r[2]==null?'—':f(r[2])}</td><td>${f(r[3])}</td></tr>`).join(""):'<tr><td colspan="4" style="text-align:left">Chưa có cặp thể loại đủ 3 phiên để tính.</td></tr>';
+const cl=p.cluster;if(!cl){$("clusterbox").innerHTML='<div class=empty>Chưa đủ dữ liệu người dùng để chạy KMeans.</div>'}else{$("clusterbox").innerHTML=`<p><b>${esc(cl.name)}</b></p><p class="mut">${cl.members} người trong cụm · k=${cl.k} · silhouette ${cl.sil==null?'—':cl.sil}</p>`;const max=Math.max(...cl.hour,...cl.user_hour,0.001);const xy=a=>a.map((v,i)=>`${12+i/23*376},${132-v/max*112}`).join(" ");$("clusterhour").innerHTML=`<div class="hourline"><svg viewBox="0 0 400 150"><polyline fill="none" stroke="var(--a)" stroke-width="2.5" points="${xy(cl.user_hour)}"/><polyline fill="none" stroke="var(--b)" stroke-width="2" stroke-dasharray="4 3" points="${xy(cl.hour)}"/>${[0,6,12,18,23].map(h=>`<text x="${12+h/23*376}" y="148" text-anchor="middle">${h}h</text>`).join("")}</svg><div class="leg"><span><b style="background:var(--a)"></b>Bạn</span><span><b style="background:var(--b)"></b>Cả cụm</span></div></div>`}
+$("foot").textContent=`Dữ liệu Takeout ${D.start}–${D.end}; metadata video phủ ${D.meta}% lượt xem. view_count là ảnh chụp lúc lấy metadata, không phải số lượt xem khi bạn mở video.`;
+</script></body></html>

@@ -123,3 +123,16 @@ Bảng hiện có trong DuckDB: `watch_raw`, `ingested_files`, `video_metadata`,
 ## 8. Thứ tự đề xuất
 
 P1 → P2 → P3 → notebook pipeline → notebook 00 → 02 → 01 → 03 → P5 → 04 → 05 → 06; P4 làm sau cùng nếu còn thời gian.
+
+## 9. Dashboard HTML và dữ liệu xuất
+
+- `reports/insight_u01.html` là bản insight cá nhân cho `u01`, được sinh từ warehouse. Các thẻ video dùng `video_facts`; khi metadata hoặc số lượng video chưa đủ, trang hiện trạng thái thiếu dữ liệu thay vì số minh họa.
+- `ypipe/templates/insight_user.html` là mẫu dùng chung; `ypipe/insight.py` dựng báo cáo cho từng người từ `watch_raw`, `sessions`, `session_sensitivity`, `user_features`, `user_clusters` và `video_facts`. Notebook 06 xuất `reports/uXX.html` cho mọi người và `reports/insight_u01.html` làm bản u01 tương thích với liên kết hiện có.
+- Có thể tạo riêng báo cáo cá nhân bằng `python -m ypipe.insight --db data/warehouse.duckdb --template ypipe/templates/insight_user.html --out-dir reports`.
+- `ypipe/templates/group_dashboard.html` là mẫu nhóm; notebook 06 dựng `reports/group_dashboard.html` và nhúng dữ liệu thật vào trang. Nút **Nạp group.json** vẫn cho phép thay payload bằng snapshot khác. Có thể xuất JSON riêng bằng `python -m ypipe.dashboard --db data/warehouse.duckdb --out reports/group.json`.
+- Hàm xuất nằm trong `ypipe/dashboard.py`, chỉ mở DuckDB ở chế độ read-only và chỉ đưa mã ẩn danh `U01`, `U02`, … vào JSON. Không xuất `user_id`, video ID hay tên người xem.
+- Cấu trúc JSON: `period` (chuỗi giai đoạn), `sil` (silhouette), `users` (`id`, `n`, `night`, `spd`, `cl`, `x`, `y`), `cats`, `clusters` (`name`, `traits`, `hour` 24 giá trị, `lift` cùng thứ tự `cats`), `hm`/`pub` (ma trận thứ × giờ 7×24), `months`, `trend` (tỷ trọng lượt mở theo thể loại/tháng), `title` (đặc điểm tiêu đề và tỷ số views/ngày trong cùng thể loại), và `combos` (cặp thể loại trong phiên, lift, views/ngày trung vị).
+- `hm`, nhịp giờ theo cụm, thể loại và xu hướng tháng được tổng hợp từ `watch_raw`; giờ đăng, đặc điểm tiêu đề và combo cần `video_facts`. Metadata không có sẽ không được suy đoán: giờ đăng hiển thị 0, kết quả tiêu đề/combo không đủ dữ liệu sẽ để danh sách rỗng, thể loại thiếu được gom thành `Không rõ`.
+- Xu hướng thể loại trong JSON lấy 12 tháng gần nhất để biểu đồ đọc được; `period` vẫn ghi toàn bộ khoảng thời gian hiện có trong kho.
+- Để dựng lại dashboard từ warehouse, chạy notebook `06_summary_dashboard`; cell cuối xuất các báo cáo cá nhân, `reports/group_dashboard.html` và `reports/group.json`. Các tệp HTML/JSON là snapshot dữ liệu tại thời điểm chạy.
+- Cả hai dashboard là báo cáo tĩnh. Không mở YouTube API khi dựng dashboard; enrichment chỉ chạy trong notebook pipeline.

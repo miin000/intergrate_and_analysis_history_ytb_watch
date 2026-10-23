@@ -1,0 +1,87 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Dashboard chung – thói quen xem YouTube</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#EEF2F4;--card:#fff;--ink:#14213D;--mut:#5B6B7F;--line:#D5DDE3;--a:#0E7C86;--cell:#E3EAEE;--soft:#FFF7E0;--warn:#7A5B00}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0E1620;--card:#16222F;--ink:#E8EEF3;--mut:#93A3B5;--line:#263647;--a:#3CC4CE;--cell:#1D2C3B;--soft:#2A2411;--warn:#E8C96A}}
+:root[data-theme=dark]{--bg:#0E1620;--card:#16222F;--ink:#E8EEF3;--mut:#93A3B5;--line:#263647;--a:#3CC4CE;--cell:#1D2C3B;--soft:#2A2411;--warn:#E8C96A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 "Be Vietnam Pro",system-ui,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:clamp(26px,4.6vw,40px);line-height:1.15;margin:0 0 10px;font-weight:800;max-width:22ch}
+h2{font-size:17px;margin:0 0 4px;font-weight:700}h3{font-size:13px;color:var(--mut);margin:26px 0 10px;font-weight:700}p{margin:0}.mut{color:var(--mut);font-size:13px}
+.demo{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:var(--soft);color:var(--warn);border:1px solid var(--warn);border-radius:10px;padding:10px 14px;margin:14px 0 22px;font-size:13px}
+.btn{cursor:pointer;font-weight:700;border:1px solid currentColor;border-radius:8px;padding:5px 12px}.btn:focus-within{outline:2px solid currentColor;outline-offset:2px}.btn input{position:absolute;opacity:0;width:1px;height:1px}
+.kpis{display:flex;flex-wrap:wrap;gap:10px 28px;margin:0 0 22px;padding:14px 0;border-block:1px solid var(--line)}.kpis b{display:block;font-size:22px;font-weight:800}.kpis span{font-size:12px;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}.grid .card{margin:0}
+.hero{display:grid;grid-template-columns:minmax(280px,1.1fr) 1fr;gap:20px}@media(max-width:700px){.hero{grid-template-columns:1fr}}
+.cl{display:flex;gap:10px;margin:0 0 14px}.cl i{flex:none;width:12px;height:12px;border-radius:50%;margin-top:5px}.cl b{display:block;font-size:14px}.cl span{font-size:12.5px;color:var(--mut)}
+.heat{display:grid;gap:3px;margin-top:12px}.heat i{aspect-ratio:1;border-radius:3px;background:color-mix(in srgb,var(--a) calc(var(--v)*100%),var(--cell))}
+.heat em,.heat .hl{font:500 11px/1 inherit;font-style:normal;color:var(--mut);display:flex;align-items:center;justify-content:center}.heat em{justify-content:flex-start}
+.lift{display:grid;gap:3px;margin-top:12px;font-size:12px}.lift div{display:flex;align-items:center;justify-content:center;min-height:34px;border-radius:5px;background:color-mix(in srgb,var(--a) calc(var(--v)*100%),var(--cell));font-weight:700}.lift .h{background:none;color:var(--mut);font-weight:500;text-align:center;font-size:11px}.lift .r{background:none;justify-content:flex-start;font-weight:500}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:500 10px "Be Vietnam Pro",system-ui,sans-serif}
+.leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut);margin-top:8px}.leg b{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}th,td{padding:7px 4px;text-align:right;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}th{font-weight:500;color:var(--mut)}td i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.ef{display:grid;grid-template-columns:minmax(100px,140px) 1fr 44px;gap:8px;align-items:center;margin:8px 0;font-size:13px}.ef .t{position:relative;height:12px;background:var(--cell);border-radius:6px}.ef .t:before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;border-left:1px solid var(--mut)}.ef u{position:absolute;top:0;height:100%;border-radius:6px}.ef .n{text-align:right;color:var(--mut)}
+</style></head><body><main>
+<h1 id="hl"></h1><p class="mut" id="sub" style="max-width:64ch"></p>
+<div class="demo"><span id="dmsg"><b>Dữ liệu minh họa.</b> Số liệu ở trang này do mình tạo để bạn xem bố cục, chưa phải kết quả thật của nhóm.</span><label class="btn">Nạp group.json<input type="file" id="file" accept=".json,application/json"></label></div>
+<div class="kpis" id="kpi"></div>
+<section class="card"><h2>Bản đồ các kiểu người xem</h2><p class="mut" id="silnote"></p><div class="hero"><div id="sc"></div><div id="cls"></div></div></section>
+<h3>Nhịp xem của cả nhóm</h3>
+<div class="grid">
+<section class="card"><h2>Cả nhóm xem vào lúc nào</h2><p class="mut">Tổng lượt xem theo thứ và giờ</p><div id="hm"></div></section>
+<section class="card"><h2>Mỗi cụm xem vào giờ nào</h2><p class="mut">Tỷ lệ lượt xem theo giờ trong ngày</p><div id="hr"></div></section>
+</div>
+<h3>Nội dung và xu hướng</h3>
+<div class="grid">
+<section class="card"><h2>Cụm nào thích thể loại nào</h2><p class="mut">Chỉ số lift: trên 1 là xem nhiều hơn mức trung bình của cả nhóm</p><div id="lf"></div></section>
+<section class="card"><h2>Xu hướng thể loại theo tháng</h2><p class="mut">Tỷ trọng lượt xem của cả nhóm</p><div id="tr"></div></section>
+</div>
+<h3>Hiệu quả của video</h3>
+<div class="grid">
+<section class="card"><h2>Video thường đăng giờ nào</h2><p class="mut">Số video xem được theo thứ và giờ đăng (giờ Việt Nam)</p><div id="pb"></div></section>
+<section class="card"><h2>Đặc điểm tiêu đề và lượt xem</h2><p class="mut">Lượt xem/ngày so với video không có đặc điểm đó, trong cùng thể loại. 1,0 là bằng nhau.</p><div id="ti"></div></section>
+<section class="card"><h2>Combo thể loại hay đi cùng nhau</h2><p class="mut">Trong cùng một phiên xem, chỉ tính video đủ lượt xem</p><table id="cb"></table></section>
+<section class="card"><h2>So sánh từng người</h2><p class="mut">Mã đã ẩn danh</p><table id="us"></table></section>
+</div>
+</main><script>
+const $=id=>document.getElementById(id),f=n=>n.toLocaleString("vi-VN"),CC=["#0E7C86","#E4572E","#7A5BD1","#C9A227","#3E9BD1","#D1477F"];
+const dn=["T2","T3","T4","T5","T6","T7","CN"];
+function demo(){let s=7;const R=()=>(s=(s*1664525+1013904223)%4294967296)/4294967296,g=(h,p,w)=>{let d=Math.min(Math.abs(h-p),24-Math.abs(h-p));return Math.exp(-d*d/(2*w*w))};
+const cen=[[-2,.8],[1.8,1.6],[1.5,-1.7],[-1.2,-1.6]],size=[4,3,3,2],pk=[23,20,14,9],U=[];let k=0;
+cen.forEach((c,i)=>{for(let j=0;j<size[i];j++){k++;U.push({id:"U"+k,n:Math.round(4000+R()*9000),night:Math.round([46,18,8,5][i]+R()*8),spd:+([4.2,2.6,3.4,1.8][i]+R()).toFixed(1),cl:i,x:c[0]+(R()-.5)*1.3,y:c[1]+(R()-.5)*1.3})}});
+const cats=["Music","Gaming","Entertainment","Education","Comedy","News"];
+const hour=pk.map(p=>{const a=[...Array(24)].map((_,h)=>.04+g(h,p,3));const t=a.reduce((x,y)=>x+y);return a.map(v=>v/t)});
+const hm=[...Array(7)].map((_,d)=>[...Array(24)].map((_,h)=>Math.round(900*(g(h,21,3.5)+.15)*(d>4?1.25:1))));
+const pub=[...Array(7)].map((_,d)=>[...Array(24)].map((_,h)=>Math.round(300*(g(h,18,3)+.5*g(h,11,2)+.05)*(d>4?.8:1))));
+const base={Music:[.3,.22,.2,.18,.17,.17,.16,.16],Gaming:[.1,.12,.14,.15,.17,.18,.2,.2],Entertainment:[.25,.24,.23,.22,.22,.21,.2,.2],Education:[.1,.1,.11,.12,.12,.13,.13,.13],Comedy:[.15,.17,.17,.18,.18,.18,.19,.19],News:[.1,.15,.15,.15,.14,.13,.12,.12]};
+return{sil:.34,period:"03/2026 – 10/2026",users:U,cats,clusters:[
+{name:"Cú đêm",traits:"Xem đêm nhiều, phiên dài, nhiều Music",hour:hour[0],lift:[1.9,1.1,1.0,.4,1.2,.5]},
+{name:"Tối thư giãn",traits:"Xem 19–22h, Gaming và hài",hour:hour[1],lift:[.8,2.2,1.2,.6,1.8,.7]},
+{name:"Ban ngày học tập",traits:"Xem chiều, nhiều Education và News",hour:hour[2],lift:[.5,.4,.8,2.6,.6,2.1]},
+{name:"Xem nhẹ buổi sáng",traits:"Ít video mỗi ngày, xem sáng",hour:hour[3],lift:[1.0,.3,1.6,1.3,1.1,1.2]}],
+hm,pub,months:["T3","T4","T5","T6","T7","T8","T9"],trend:Object.fromEntries(Object.entries(base).slice(0,4).map(([k,v])=>[k,v.slice(0,7)])),
+title:[["Có con số",1.22],["Có ngoặc [ ]",1.12],["Có emoji",1.07],["Viết HOA nhiều",.94],["Có dấu hỏi",.88],["Dài hơn 60 ký tự",.81]],
+combos:[["Music + Entertainment",2.4,"4,2 nghìn"],["Gaming + Comedy",2.1,"3,1 nghìn"],["Education + News",1.9,"1,6 nghìn"],["Music + Comedy",1.5,"2,8 nghìn"]]}}
+function hmap(el,M,cols,lab){const mx=Math.max(...M.flat());let h=`<div class="heat" style="grid-template-columns:24px repeat(${cols},1fr)"><span></span>`+[...Array(cols).keys()].map(i=>`<span class="hl">${i%3?"":i}</span>`).join("");M.forEach((r,i)=>{h+=`<em>${lab[i]}</em>`+r.map((v,j)=>`<i style="--v:${(v/mx).toFixed(2)}" title="${lab[i]} ${j}h: ${v}"></i>`).join("")});$(el).innerHTML=h+"</div>"}
+function render(D){const K=D.clusters,U=D.users,C=D.cats,tot=U.reduce((a,u)=>a+u.n,0);
+$("hl").textContent=`${U.length} người xem chia thành ${K.length} nhóm rõ rệt`;
+$("sub").textContent=`Giai đoạn ${D.period}. Mỗi chấm là một người; người ở gần nhau có thói quen xem giống nhau.`;
+$("kpi").innerHTML=[[U.length,"người dùng"],[f(tot),"lượt xem"],[K.length,"cụm KMeans"],[D.sil.toFixed(2),"silhouette"]].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+$("silnote").textContent=`Hai trục là thành phần chính (PCA) của các đặc trưng hành vi. Silhouette ${D.sil.toFixed(2)}: ${D.sil>=.5?"cụm tách rõ":D.sil>=.25?"cụm tách ở mức vừa, nên kiểm tra thêm độ ổn định":"cụm chưa tách rõ"}.`;
+const xs=U.map(u=>u.x),ys=U.map(u=>u.y),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+$("sc").innerHTML=`<svg viewBox="0 0 420 300"><rect x="10" y="10" width="400" height="260" rx="8" fill="none" stroke="var(--line)"/>`+U.map(u=>`<circle cx="${30+(u.x-x0)/(x1-x0||1)*360}" cy="${250-(u.y-y0)/(y1-y0||1)*220}" r="${5+u.n/D.users.reduce((m,v)=>Math.max(m,v.n),1)*8}" fill="${CC[u.cl]}" opacity=".85"><title>${u.id}: ${f(u.n)} lượt</title></circle><text x="${30+(u.x-x0)/(x1-x0||1)*360}" y="${248-(u.y-y0)/(y1-y0||1)*220-12}" text-anchor="middle">${u.id}</text>`).join("")+`<text x="210" y="288" text-anchor="middle">Thành phần chính 1</text><text x="0" y="0" transform="translate(4 140) rotate(-90)" text-anchor="middle">Thành phần chính 2</text></svg>`;
+$("cls").innerHTML=K.map((c,i)=>`<div class="cl"><i style="background:${CC[i]}"></i><div><b>Cụm ${i+1}: ${c.name} <span>(${U.filter(u=>u.cl==i).length} người)</span></b><span>${c.traits}</span></div></div>`).join("");
+hmap("hm",D.hm,24,dn);
+$("hr").innerHTML=`<svg viewBox="0 0 400 190">`+[0,6,12,18,23].map(h=>`<text x="${15+h/23*370}" y="184" text-anchor="middle">${h}h</text>`).join("")+K.map((c,i)=>{const m=Math.max(...c.hour);return `<polyline fill="none" stroke="${CC[i]}" stroke-width="2.2" stroke-linejoin="round" points="${c.hour.map((v,h)=>`${15+h/23*370},${165-v/.13*150}`).join(" ")}"/>`}).join("")+`</svg><div class="leg">${K.map((c,i)=>`<span><b style="background:${CC[i]}"></b>${c.name}</span>`).join("")}</div>`;
+$("lf").innerHTML=`<div class="lift" style="grid-template-columns:110px repeat(${C.length},1fr)"><div class="h"></div>${C.map(c=>`<div class="h">${c}</div>`).join("")}`+K.map((k,i)=>`<div class="r">${k.name}</div>`+k.lift.map(v=>`<div style="--v:${Math.min(v/2.6,1).toFixed(2)};color:${v>1.6?"#fff":"inherit"}">${v.toFixed(1)}</div>`).join("")).join("")+`</div>`;
+const T=Object.entries(D.trend),n=D.months.length,mxT=Math.max(...T.flat(2).filter(Number));
+$("tr").innerHTML=`<svg viewBox="0 0 400 190">`+D.months.map((m,i)=>`<text x="${20+i/(n-1)*360}" y="184" text-anchor="middle">${m}</text>`).join("")+T.map(([k,v],i)=>`<polyline fill="none" stroke="${CC[i+1]}" stroke-width="2.2" stroke-linejoin="round" points="${v.map((y,j)=>`${20+j/(n-1)*360},${165-y/(mxT*1.1)*150}`).join(" ")}"/>`).join("")+`</svg><div class="leg">${T.map(([k],i)=>`<span><b style="background:${CC[i+1]}"></b>${k}</span>`).join("")}</div>`;
+hmap("pb",D.pub,24,dn);
+$("ti").innerHTML=D.title.map(([l,r])=>{const w=Math.min(Math.abs(r-1)/.4,1)*50;return `<div class="ef"><span>${l}</span><span class="t"><u style="${r>=1?`left:50%;width:${w}%;background:var(--a)`:`right:50%;width:${w}%;background:#E4572E`}"></u></span><span class="n">${r.toFixed(2)}</span></div>`}).join("");
+$("cb").innerHTML=`<tr><th>Combo</th><th>Lift</th><th>Views/ngày (trung vị)</th></tr>`+D.combos.map(c=>`<tr><td>${c[0]}</td><td>${c[1].toFixed(1)}</td><td>${c[2]}</td></tr>`).join("");
+$("us").innerHTML=`<tr><th>Người</th><th>Lượt xem</th><th>Xem đêm</th><th>Phiên/ngày</th></tr>`+U.map(u=>`<tr><td><i style="background:${CC[u.cl]}"></i>${u.id}</td><td>${f(u.n)}</td><td>${u.night}%</td><td>${u.spd}</td></tr>`).join("")}
+render(demo());
+$("file").onchange=e=>{const r=new FileReader();r.onload=()=>{try{render(JSON.parse(r.result));$("dmsg").innerHTML="<b>Dữ liệu thật</b> từ file đã nạp."}catch(x){$("dmsg").innerHTML="<b>Không đọc được file.</b> Kiểm tra lại cấu trúc group.json."}};r.readAsText(e.target.files[0])};
+</script></body></html>
